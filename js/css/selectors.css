@@ -1,0 +1,19 @@
+@font-face{font-family:"Parisienne";src:url("/fonts/parisienne/Parisienne/Parisienne-Regular.ttf")}
+@font-face{font-family:"Roboto-Regular";src:url("/fonts/roboto/Roboto/Roboto-Regular.ttf")}
+#middle-col{margin:15px 0;background-color:#d3d3d3;border:1px solid #939393;border-radius:10px;padding:30px;opacity:90%}
+body{background-image:url("/images/unicorn.jpg");background-repeat:repeat}
+.container-fluid{font-family:"Roboto-Regular", sans-serif;}
+.myPoint{color:grey}
+#h1-tittle{text-align: center;}
+#h3-tittle{text-align: center;}
+#motto{font-family:'Parisienne',sans-serif; font-size:30px;line-height:20px;margin-top:30px;}
+#rowForWishesList{margin: 0px 0px}
+#wishes-list{margin:10px 100px;}
+.wish-input{margin-right:10px}
+.myWish{color:purple}
+.black{color:black}
+#all-points{font-size:25px;color:#7e7e7e}
+#percentage{font-size:25px;color:#7e7e7e}
+.isCompleted{font-size:25px;color:#7e7e7e}
+#my-points{margin:20px 0px;text-align:center;background-color:#ececec;border-radius:10px;padding:10px}
+#max-points{text-align:center;color:gray}
