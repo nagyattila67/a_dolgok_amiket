@@ -6,27 +6,50 @@ for (let k in myWishes) {
 const isCompletedAll=[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]
 const wishes=Array();
 
-myWishes.forEach((value,index)=>{
-    let myObject=Object();
-    myObject.id=index+1;
-    myObject.name=value;
-    myObject.point=points[index];
-    myObject.isCompleted=isCompletedAll[index];
-    wishes[index]=myObject;
-})
+import {makeAllObject} from "/js/modules.js"
+makeAllObject(lines,linesBoolean,allLines);
 
-const myAllPoints = Array();
-wishes.forEach((value, index) => { myAllPoints[index] = value.point })
+const container = document.querySelector("#text");
 
-const container = document.querySelector("#wishes-list")
+import {loadText} from "/js/modules.js"
+loadText(allLines,container);
 
-import {represent} from "/js/modules.js"
-import {loading} from "/js/modules.js"
-import {missionCompletedOrNot} from "/js/modules.js"
+import {countAverage} from "/js/modules.js"
 
-loading(container,wishes,points);
+countAverage(linesBoolean);
 
-document.querySelectorAll(".wish-input").forEach((value,index) => {
-    value.addEventListener('click', ()=>{missionCompletedOrNot(index,wishes,myAllPoints)})
-})
+//import {inputClick} from "/js/modules.js"
+const inputClick = function (place = this) {
+    if (place.path[0].id != 'restart-button') {
+        //olyankor ui. a restart() hĂ­vnĂĄ meg a virtuĂĄlis click miatt a checked ĂĄtĂ­rĂĄsakor
+        let myId = place.path[0].id;
+        let myStatus = allLines[myId].status ? false : true;
+        allLines[myId].status = myStatus;
+        linesBoolean[myId] = myStatus;
+        let mySpanId = 'span' + myId;
+        document.querySelector(`#${mySpanId}`).innerHTML =
+            myStatus ? `<s style="color:grey">${allLines[myId].line}</s>` : `${allLines[myId].line}`
+        countAverage(linesBoolean)
+    }
+}
 
+//import {restart} from "/js/modules.js"
+const restart = function () {
+    container.innerHTML = '';
+    linesBoolean.forEach((value,index)=>{linesBoolean[index]=false;})
+    allLines = Array();
+    makeAllObject(lines,linesBoolean,allLines);
+    loadText(allLines,container);
+    countAverage(linesBoolean);
+    addEventForInput()
+}
+
+document.querySelector("#restart-button").addEventListener('click', restart)
+
+//import {addEventForInput} from "/js/modules.js"
+const addEventForInput = function(){
+    document.querySelectorAll(".statusInput").forEach((value,index) => {
+        document.querySelectorAll(".statusInput")[index].addEventListener('click', inputClick)
+    })
+}
+addEventForInput()
